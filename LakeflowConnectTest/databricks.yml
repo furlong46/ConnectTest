@@ -1,6 +1,8 @@
 # Databricks Asset Bundle configuration, more info here: https://docs.databricks.com/en/dev-tools/bundles/settings.html
 bundle:
   name: "LakeflowConnectTest"
+  # run_as:
+  #     - service_principal_name: 30d412d8-8c66-43c0-b4ac-31b882eff468
 
 include:
   - resources/*.yml
@@ -13,17 +15,19 @@ targets:
     default: true
     workspace:
       host: https://adb-685224707716406.6.azuredatabricks.net
-    run_as:
-      user_name: leo.furlong@databricks.com
+      # profile: SP
+    # run_as:
+    #   service_principal_name: 30d412d8-8c66-43c0-b4ac-31b882eff468
 
   # The 'prod' target, used for production deployment.
   prod:
     mode: production
     workspace:
       host: https://adb-685224707716406.6.azuredatabricks.net
+      # profile: SP
       # We always use /Users/leo.furlong@databricks.com for all resources to make sure we only have a single copy.
-      root_path: /Users/leo.furlong@databricks.com/.bundle/${bundle.name}/${bundle.target}
-    run_as:
-      # This runs as leo.furlong@databricks.com in production. We could also use a service principal here,
-      # see https://docs.databricks.com/dev-tools/bundles/permissions.html.
-      user_name: leo.furlong@databricks.com
+      root_path: /${bundle.name}/${bundle.target}
+    # run_as:
+    #   # This runs as leo.furlong@databricks.com in production. We could also use a service principal here,
+    #   # see https://docs.databricks.com/dev-tools/bundles/permissions.html.
+    #   service_principal_name: 30d412d8-8c66-43c0-b4ac-31b882eff468
