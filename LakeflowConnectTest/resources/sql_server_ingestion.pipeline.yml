@@ -1,0 +1,34 @@
+resources:
+  pipelines:
+    pipeline_ingestion_gw:
+      name: ingestion_gw
+      clusters:
+        - label: default
+          node_type_id: Standard_F4s
+          driver_node_type_id: Standard_E8d_v4
+          num_workers: 1
+      gateway_definition:
+        connection_name: adventureworksoltp
+        gateway_storage_catalog: leotest
+        gateway_storage_schema: adventureworks
+        source_type: SQLSERVER
+      target: adventureworks
+      continuous: true
+      channel: PREVIEW
+      catalog: leotest
+
+    pipeline_ingestion_pipe:
+      name: ingestion_pipe
+      ingestion_definition:
+        ingestion_gateway_id: ${resources.pipelines.pipeline_ingestion_gw.id}
+        objects:
+          - schema:
+              source_catalog: adventureworksoltp
+              source_schema: SalesLT
+              destination_catalog: leotest
+              destination_schema: adventureworks
+        source_type: SQLSERVER
+      schema: adventureworks
+      development: false
+      channel: PREVIEW
+      catalog: leotest
