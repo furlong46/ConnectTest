@@ -11,3 +11,6 @@ resources:
         - task_key: ingestion_pipe_job
           pipeline_task:
             pipeline_id: ${resources.pipelines.pipeline_ingestion_pipe.id}
+      permissions:
+        - user_name: leo.furlong@databricks.com
+          level: CAN_MANAGE_RUN

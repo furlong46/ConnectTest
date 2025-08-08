@@ -16,9 +16,9 @@ resources:
       continuous: true
       channel: PREVIEW
       catalog: leotest
-      # permissions:
-      #   - service_principal_name: 30d412d8-8c66-43c0-b4ac-31b882eff468
-      #     level: IS_OWNER
+      permissions:
+        - user_name: leo.furlong@databricks.com
+          level: CAN_RUN
 
     pipeline_ingestion_pipe:
       name: ingestion_pipe
@@ -35,6 +35,6 @@ resources:
       development: false
       channel: PREVIEW
       catalog: leotest
-      # permissions:
-      #   - service_principal_name: 30d412d8-8c66-43c0-b4ac-31b882eff468
-      #     level: IS_OWNER
+      permissions:
+        - user_name: leo.furlong@databricks.com
+          level: CAN_RUN
